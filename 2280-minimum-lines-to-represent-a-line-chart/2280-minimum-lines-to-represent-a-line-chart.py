@@ -1,0 +1,24 @@
+from typing import List
+
+class Solution:
+    def minimumLines(self, stockPrices: List[List[int]]) -> int:
+        n = len(stockPrices)
+
+        if n <= 1:
+            return 0
+
+        stockPrices.sort()
+
+        lines = 1
+
+        for i in range(2, n):
+            x1, y1 = stockPrices[i - 2]
+            x2, y2 = stockPrices[i - 1]
+            x3, y3 = stockPrices[i]
+
+            # Compare slopes using cross multiplication
+            if (y2 - y1) * (x3 - x2) != (y3 - y2) * (x2 - x1):
+                lines += 1
+
+        return lines
+        
